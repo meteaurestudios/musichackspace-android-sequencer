@@ -209,7 +209,7 @@ class MainActivity : Activity() {
 
                         currentStep = step
                     }
-                    sleep(50)
+                    sleep(10)
                 }
                 catch (ex: InterruptedException) {
                     interrupt()
