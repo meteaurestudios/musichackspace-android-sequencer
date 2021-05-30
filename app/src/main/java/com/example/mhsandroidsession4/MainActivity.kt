@@ -7,7 +7,10 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.SeekBar
+import android.widget.Spinner
 import com.example.mhsandroidsession4.databinding.ActivityMainBinding
 
 const val TAG = "Mytag"
@@ -17,6 +20,7 @@ class MainActivity : Activity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var stepsArray : Array<Step>
     private lateinit var stepsPitchArray : Array<Spinner>
+    private lateinit var engineCommunicationThread : CommunicationThread
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,6 +125,10 @@ class MainActivity : Activity() {
                 }
 
             })
+
+            // Engine communication thread init
+            engineCommunicationThread = CommunicationThread(this)
+            engineCommunicationThread.start()
         }
     }
 
@@ -132,6 +140,16 @@ class MainActivity : Activity() {
     override fun onPause() {
         stopAudio()
         super.onPause()
+    }
+
+    fun updateCurrentStep(step : Int) {
+        // Remove previous highlight on all steps
+        for(i in stepsArray.indices) {
+            stepsArray[i].highlightStep(false)
+        }
+
+        // Highlight new step
+        stepsArray[step].highlightStep(true)
     }
 
     fun setPlayValue(isPlaying : Boolean) {
@@ -163,11 +181,49 @@ class MainActivity : Activity() {
     external fun setEngineStepIsActive(step : Int, isActive: Boolean)
     external fun setEngineStepPitch(step : Int, pitch: Int)
 
+    external fun getEngineCurrentStep() : Int
+
     companion object {
         // Used to load the 'native-lib' library on application startup.
         init {
             System.loadLibrary("native-lib")
         }
+    }
+
+    private class CommunicationThread(a: MainActivity) : Thread() {
+
+        private var activity : MainActivity = a
+        private var mStop = false
+        private var currentStep = 0
+
+        override fun run() {
+
+            while(true) {
+                synchronized(this) {
+                    if(mStop) {
+                        mStop = false
+                        return
+                    }
+
+                    val step = activity.getEngineCurrentStep()
+
+                    if(step != currentStep) {
+
+                        activity.runOnUiThread {
+                            activity.updateCurrentStep(step)
+                        }
+
+                        currentStep = step
+                    }
+                }
+
+            }
+        }
+
+        fun kill() {
+            mStop = true
+        }
+
     }
 
 }

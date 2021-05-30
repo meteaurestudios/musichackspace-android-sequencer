@@ -17,6 +17,7 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private var listener: OnStateChangeListener? = null
     private var isActive = false
+    private var isHighlighted = false
     private var radius : Float = 0F
 
     private val circlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -45,7 +46,7 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
             MotionEvent.ACTION_UP -> {
 
                 val new_value = !isActive
-                updateView(new_value)
+                updateSate(new_value)
                 listener?.onStateChange(new_value)
             }
         }
@@ -53,15 +54,27 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
         return true
     }
 
-    fun updateView(pressed : Boolean) {
-        if(pressed) {
+    fun updateSate(active: Boolean) {
+        if(active) {
             circlePaint.color = Color.MAGENTA
-            isActive = true
         }
         else {
             circlePaint.color = Color.GRAY
-            isActive = false
         }
+
+        isActive = active
+        invalidate()
+    }
+
+    fun highlightStep(highligthed : Boolean) {
+        if(highligthed) {
+            circlePaint.color = Color.CYAN
+        }
+        else {
+            updateSate(isActive)
+        }
+
+        isHighlighted = highligthed
         invalidate()
     }
 

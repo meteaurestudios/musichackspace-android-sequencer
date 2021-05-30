@@ -26,6 +26,8 @@ public:
     void setStepIsActive(int step, bool isActive);
     void setStepPitch(int step, int pitch);
 
+    int getCurrentStep();
+
     oboe::DataCallbackResult onAudioReady(oboe::AudioStream *oboeStream,
                                           void *audioData,
                                           int32_t numFrames) override;

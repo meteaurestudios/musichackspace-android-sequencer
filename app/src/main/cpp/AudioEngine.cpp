@@ -163,6 +163,12 @@ void AudioEngine::setStepPitch(int step, int pitch)
 }
 
 // -------------------------------------------------------------------------------------------------
+int AudioEngine::getCurrentStep()
+{
+    return mCurrentStep;
+}
+
+// -------------------------------------------------------------------------------------------------
 float AudioEngine::pitchToFrequency(int pitch)
 {
     const float c4_midi_note = 60;

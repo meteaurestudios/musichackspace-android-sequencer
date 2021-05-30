@@ -66,3 +66,9 @@ Java_com_example_mhsandroidsession4_MainActivity_setEngineStepPitch(JNIEnv *env,
                                                                     jint step, jint pitch) {
     engine.setStepPitch(step, pitch);
 }
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_example_mhsandroidsession4_MainActivity_getEngineCurrentStep(JNIEnv *env, jobject thiz) {
+    return engine.getCurrentStep();
+}
