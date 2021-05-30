@@ -197,7 +197,7 @@ class MainActivity : Activity() {
 
         override fun run() {
 
-            while(!isInterrupted()) {
+            while(!isInterrupted) {
                 try {
                     val step = activity.getEngineCurrentStep()
 
