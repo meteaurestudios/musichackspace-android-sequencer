@@ -64,13 +64,13 @@ class MainActivity : Activity() {
         })
 
         // Pad
-        binding.pad.setOnPressedListener(object : Pad.OnPressedListener() {
-
-            override fun onPadPressed(pressed : Boolean) {
-                setHoldValue(pressed)
-            }
-
-        })
+//        binding.pad.setOnPressedListener(object : Pad.OnPressedListener() {
+//
+//            override fun onPadPressed(pressed : Boolean) {
+//                setHoldValue(pressed)
+//            }
+//
+//        })
 
     }
 
@@ -98,7 +98,7 @@ class MainActivity : Activity() {
 
     fun setHoldValue(hold : Boolean) {
         binding.holdSwitch.isChecked = hold // update switch
-        binding.pad.updateView(hold) // update pad
+        //binding.pad.updateView(hold) // update pad
         hold(hold) // notify engine
     }
 

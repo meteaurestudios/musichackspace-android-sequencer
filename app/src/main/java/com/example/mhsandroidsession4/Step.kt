@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 
-class Pad(context: Context, attrs: AttributeSet) : View(context, attrs) {
+class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     abstract class OnPressedListener {
         abstract fun onPadPressed(pressed : Boolean)
