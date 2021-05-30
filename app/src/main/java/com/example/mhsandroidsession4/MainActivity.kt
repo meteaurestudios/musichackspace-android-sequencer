@@ -7,10 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.SeekBar
-import android.widget.Spinner
+import android.widget.*
 import com.example.mhsandroidsession4.databinding.ActivityMainBinding
 
 const val TAG = "Mytag"
@@ -19,6 +16,7 @@ class MainActivity : Activity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var stepsArray : Array<Step>
+    private lateinit var stepsPitchArray : Array<Spinner>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +24,7 @@ class MainActivity : Activity() {
         // Initialize view binding -----
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         // Retrieve default sample rate and burst size from device -----
 
@@ -90,30 +87,41 @@ class MainActivity : Activity() {
 
         // Steps pitch -----
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.pitch_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            binding.spinner.adapter = adapter
+        stepsPitchArray = arrayOf(binding.step1Pitch,
+                                  binding.step2Pitch,
+                                  binding.step3Pitch,
+                                  binding.step4Pitch,
+                                  binding.step5Pitch,
+                                  binding.step6Pitch,
+                                  binding.step7Pitch,
+                                  binding.step8Pitch)
+
+        for(i in stepsPitchArray.indices) {
+            // Create an ArrayAdapter using the string array and a default spinner layout
+            ArrayAdapter.createFromResource(
+                this,
+                R.array.pitch_array,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                stepsPitchArray[i].adapter = adapter
+            }
+
+            stepsPitchArray[i].setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+
+                override fun onItemSelected(parent: AdapterView<*>,  view: View?,  pos: Int,  id: Long ) {
+                    setStepPitchValue(i, pos)
+                    Log.i(TAG, "step $i value $pos")
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // Do nothing
+                }
+
+            })
         }
-
-        binding.spinner.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
-
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                setStepPitchValue(0, pos)
-                Log.i(TAG, "value $pos")
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing
-            }
-
-        })
     }
 
     override fun onResume() {

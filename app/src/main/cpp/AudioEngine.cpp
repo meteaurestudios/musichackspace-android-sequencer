@@ -64,11 +64,11 @@ void AudioEngine::setSampleRate(float sampleRate)
 {
     mSampleRate = sampleRate;
     mSineWaveGen.setSampleRate(sampleRate);
-    UpdateSequencePhaseIncrement();
+    updateSequencePhaseIncrement();
 }
 
 // -------------------------------------------------------------------------------------------------
-void AudioEngine::UpdateSequencePhaseIncrement()
+void AudioEngine::updateSequencePhaseIncrement()
 {
     const double samples_per_step = (60.0/mTempo) * mSampleRate / 4.f; // 1/16 bar per step
     mSequencePhaseIncrement = 1.0/samples_per_step;

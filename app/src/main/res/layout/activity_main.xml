@@ -42,24 +42,26 @@
         app:layout_constraintVertical_bias="0.333" />
 
     <com.example.mhsandroidsession4.Step
-        android:id="@+id/step4"
+        android:id="@+id/step1"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/step7"
+
+        app:layout_constraintEnd_toStartOf="@+id/step2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/step6" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.example.mhsandroidsession4.Step
-        android:id="@+id/step6"
+        android:id="@+id/step2"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/step4"
+
+        app:layout_constraintEnd_toStartOf="@+id/step3"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/step3" />
+        app:layout_constraintStart_toEndOf="@+id/step1" />
 
     <com.example.mhsandroidsession4.Step
         android:id="@+id/step3"
@@ -67,9 +69,49 @@
         android:layout_height="70dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/step4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/step2" />
+
+    <com.example.mhsandroidsession4.Step
+        android:id="@+id/step4"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/step5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/step3" />
+
+    <com.example.mhsandroidsession4.Step
+        android:id="@+id/step5"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/step6"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/step4" />
+
+    <com.example.mhsandroidsession4.Step
+        android:id="@+id/step6"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/step7"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/step5" />
+
+    <com.example.mhsandroidsession4.Step
+        android:id="@+id/step7"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/step8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/step6" />
 
     <com.example.mhsandroidsession4.Step
         android:id="@+id/step8"
@@ -81,48 +123,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/step7" />
 
-    <com.example.mhsandroidsession4.Step
-        android:id="@+id/step1"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/step2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.example.mhsandroidsession4.Step
-        android:id="@+id/step2"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/step5"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/step1" />
-
-    <com.example.mhsandroidsession4.Step
-        android:id="@+id/step7"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/step8"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/step4" />
-
-    <com.example.mhsandroidsession4.Step
-        android:id="@+id/step5"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/step3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/step2" />
-
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/step1Pitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -130,5 +132,76 @@
         app:layout_constraintBottom_toTopOf="@+id/step1"
         app:layout_constraintEnd_toEndOf="@+id/step1"
         app:layout_constraintStart_toStartOf="@+id/step1" />
+
+    <Spinner
+        android:id="@+id/step2Pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/step2"
+        app:layout_constraintEnd_toEndOf="@+id/step2"
+        app:layout_constraintStart_toStartOf="@+id/step2" />
+
+    <Spinner
+        android:id="@+id/step3Pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/step3"
+        app:layout_constraintEnd_toEndOf="@+id/step3"
+        app:layout_constraintStart_toStartOf="@+id/step3" />
+
+    <Spinner
+        android:id="@+id/step4Pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/step4"
+        app:layout_constraintEnd_toEndOf="@+id/step4"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="@+id/step4" />
+
+    <Spinner
+        android:id="@+id/step5Pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/step5"
+        app:layout_constraintEnd_toEndOf="@+id/step5"
+        app:layout_constraintStart_toStartOf="@+id/step5" />
+
+    <Spinner
+        android:id="@+id/step6Pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/step6"
+        app:layout_constraintEnd_toEndOf="@+id/step6"
+        app:layout_constraintStart_toStartOf="@+id/step6" />
+
+    <Spinner
+        android:id="@+id/step7Pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/step7"
+        app:layout_constraintEnd_toEndOf="@+id/step7"
+        app:layout_constraintStart_toStartOf="@+id/step7" />
+
+    <Spinner
+        android:id="@+id/step8Pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/step8"
+        app:layout_constraintEnd_toEndOf="@+id/step8"
+        app:layout_constraintStart_toStartOf="@+id/step8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
