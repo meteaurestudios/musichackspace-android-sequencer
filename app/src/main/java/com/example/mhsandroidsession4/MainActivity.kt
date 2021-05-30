@@ -193,18 +193,12 @@ class MainActivity : Activity() {
     private class CommunicationThread(a: MainActivity) : Thread() {
 
         private var activity : MainActivity = a
-        private var mStop = false
         private var currentStep = 0
 
         override fun run() {
 
-            while(true) {
-                synchronized(this) {
-                    if(mStop) {
-                        mStop = false
-                        return
-                    }
-
+            while(!isInterrupted()) {
+                try {
                     val step = activity.getEngineCurrentStep()
 
                     if(step != currentStep) {
@@ -215,15 +209,13 @@ class MainActivity : Activity() {
 
                         currentStep = step
                     }
+                    sleep(50)
                 }
-
+                catch (ex: InterruptedException) {
+                    interrupt()
+                }
             }
         }
-
-        fun kill() {
-            mStop = true
-        }
-
     }
 
 }
