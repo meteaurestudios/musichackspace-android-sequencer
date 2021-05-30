@@ -7,17 +7,24 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.SeekBar
 import android.widget.Switch
 import android.widget.TextView
+import com.example.mhsandroidsession4.databinding.ActivityMainBinding
 
 const val TAG = "Mytag"
 
 class MainActivity : Activity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Retrieve default sample rate and burst size from device -----
 
@@ -31,13 +38,13 @@ class MainActivity : Activity() {
         }
 
         // Switch
-        findViewById<Switch>(R.id.holdSwitch).setOnCheckedChangeListener { switch, state ->
+        binding.holdSwitch.setOnCheckedChangeListener { switch, state ->
             setHoldValue(state)
             Log.i(TAG, "State is $state")
         }
 
         // Set the maximum frequency value to 1 kHz and init value to 440 Hz
-        val seekbar = findViewById<SeekBar>(R.id.seekBar)
+        val seekbar = binding.seekBar
         seekbar.max = 1000
         //seekbar.progress = 440
         setFrequencyValue(440)
@@ -57,7 +64,7 @@ class MainActivity : Activity() {
         })
 
         // Pad
-        findViewById<Pad>(R.id.pad).setOnPressedListener(object : Pad.OnPressedListener() {
+        binding.pad.setOnPressedListener(object : Pad.OnPressedListener() {
 
             override fun onPadPressed(pressed : Boolean) {
                 setHoldValue(pressed)
@@ -90,14 +97,14 @@ class MainActivity : Activity() {
 //    }
 
     fun setHoldValue(hold : Boolean) {
-        findViewById<Switch>(R.id.holdSwitch).isChecked = hold // update switch
-        findViewById<Pad>(R.id.pad).updateView(hold) // update pad
+        binding.holdSwitch.isChecked = hold // update switch
+        binding.pad.updateView(hold) // update pad
         hold(hold) // notify engine
     }
 
     fun setFrequencyValue(freq : Int) {
-        findViewById<SeekBar>(R.id.seekBar).progress = freq - 20 // update seekbar
-        findViewById<TextView>(R.id.frequencyValue).text = "$freq Hz"// update text value
+        binding.seekBar.progress = freq - 20 // update seekbar
+        binding.frequencyValue.text = "$freq Hz"// update text value
         setFrequency(freq) // notify engine
     }
 
