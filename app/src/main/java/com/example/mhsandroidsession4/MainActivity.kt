@@ -6,7 +6,11 @@ import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.SeekBar
+import android.widget.Spinner
 import com.example.mhsandroidsession4.databinding.ActivityMainBinding
 
 const val TAG = "Mytag"
@@ -62,7 +66,7 @@ class MainActivity : Activity() {
             override fun onStopTrackingTouch(p0: SeekBar?) { }
         })
 
-        // Steps -----
+        // Steps on/off -----
 
         stepsArray = arrayOf(binding.step1,
                              binding.step2,
@@ -77,13 +81,39 @@ class MainActivity : Activity() {
             stepsArray[i].setOnStateChangeListener(object: Step.OnStateChangeListener() {
 
                 override fun onStateChange(isActive: Boolean) {
-                    setStepIsActive(i, isActive)
+                    setStepIsActiveValue(i, isActive)
                     Log.i(TAG, "step $i is $isActive")
                 }
 
             })
         }
 
+        // Steps pitch -----
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.pitch_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            binding.spinner.adapter = adapter
+        }
+
+        binding.spinner.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                setStepPitchValue(0, pos)
+                Log.i(TAG, "value $pos")
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+
+        })
     }
 
     override fun onResume() {
@@ -107,8 +137,12 @@ class MainActivity : Activity() {
         setEngineTempo(tempo) // notify engine
     }
 
-    fun setStepIsActive(step : Int, isActive : Boolean) {
+    fun setStepIsActiveValue(step : Int, isActive : Boolean) {
         setEngineStepIsActive(step, isActive)
+    }
+
+    fun setStepPitchValue(step : Int, pitch : Int) {
+        setEngineStepPitch(step, pitch)
     }
 
     // Native methods
@@ -119,6 +153,7 @@ class MainActivity : Activity() {
     external fun setEngineIsPlaying(isPlaying: Boolean)
     external fun setEngineTempo(tempo : Int)
     external fun setEngineStepIsActive(step : Int, isActive: Boolean)
+    external fun setEngineStepPitch(step : Int, pitch: Int)
 
     companion object {
         // Used to load the 'native-lib' library on application startup.
@@ -126,4 +161,5 @@ class MainActivity : Activity() {
             System.loadLibrary("native-lib")
         }
     }
+
 }

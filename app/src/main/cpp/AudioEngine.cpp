@@ -13,8 +13,9 @@
 // -------------------------------------------------------------------------------------------------
 AudioEngine::AudioEngine()
 {
-    // Initialize steps value to false
+    // Initialize steps values
     mIsStepActive.fill(false);
+    mStepPitch.fill(0);
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -69,7 +70,7 @@ void AudioEngine::setSampleRate(float sampleRate)
 // -------------------------------------------------------------------------------------------------
 void AudioEngine::UpdateSequencePhaseIncrement()
 {
-    const double samples_per_step = (60.0/mTempo) * mSampleRate / 4.f; // 1/16 bar
+    const double samples_per_step = (60.0/mTempo) * mSampleRate / 4.f; // 1/16 bar per step
     mSequencePhaseIncrement = 1.0/samples_per_step;
 }
 
@@ -98,9 +99,14 @@ AudioEngine::onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_
         // Step change
         if(mSequencePhase >= 1.0) {
 
-            // Increase step counter and reset sequence phase
-            mCurrentStep = (mCurrentStep+1) % (kSequencerStepsCount);
+            // Truncate phase
             mSequencePhase = fmod(mSequencePhase, 1.0);
+
+            // Increase current step index
+            mCurrentStep = (mCurrentStep+1) % (kSequencerStepsCount);
+
+            // Update sine wave pitch
+            mSineWaveGen.setFrequency(pitchToFrequency(mStepPitch[mCurrentStep]));
         }
 
         // Compute envelope level -----
@@ -141,10 +147,25 @@ void AudioEngine::setIsPlaying(bool isPlaying)
 void AudioEngine::setTempo(int tempo)
 {
     mTempo = (float) tempo;
-    UpdateSequencePhaseIncrement();
+    updateSequencePhaseIncrement();
 }
 
 // -------------------------------------------------------------------------------------------------
-void AudioEngine::setStepIsActive(int step, bool isActive) {
+void AudioEngine::setStepIsActive(int step, bool isActive)
+{
     mIsStepActive[step] = isActive;
+}
+
+// -------------------------------------------------------------------------------------------------
+void AudioEngine::setStepPitch(int step, int pitch)
+{
+    mStepPitch[step] = pitch;
+}
+
+// -------------------------------------------------------------------------------------------------
+float AudioEngine::pitchToFrequency(int pitch)
+{
+    const float c4_midi_note = 60;
+    const float distance_from_A440_note = (c4_midi_note + mStepPitch[mCurrentStep]) - 69;
+    return powf(2.f, distance_from_A440_note/12) * 440.f;
 }

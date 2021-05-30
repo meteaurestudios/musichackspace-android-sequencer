@@ -59,3 +59,10 @@ Java_com_example_mhsandroidsession4_MainActivity_setEngineStepIsActive(JNIEnv *e
                                                                        jboolean is_active) {
     engine.setStepIsActive(step, is_active);
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_mhsandroidsession4_MainActivity_setEngineStepPitch(JNIEnv *env, jobject thiz,
+                                                                    jint step, jint pitch) {
+    engine.setStepPitch(step, pitch);
+}

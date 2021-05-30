@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">MHS Android Session 4</string>
+
+    <string-array name="pitch_array">
+        <item>C</item>
+        <item>C#</item>
+        <item>D</item>
+        <item>D#</item>
+        <item>E</item>
+        <item>F</item>
+        <item>F#</item>
+        <item>G</item>
+        <item>G#</item>
+        <item>A</item>
+        <item>A#</item>
+        <item>B</item>
+    </string-array>
 </resources>

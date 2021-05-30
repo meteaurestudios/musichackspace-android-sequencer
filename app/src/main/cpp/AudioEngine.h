@@ -24,6 +24,7 @@ public:
     void setIsPlaying(bool isPlaying);
     void setTempo(int tempo);
     void setStepIsActive(int step, bool isActive);
+    void setStepPitch(int step, int pitch);
 
     oboe::DataCallbackResult onAudioReady(oboe::AudioStream *oboeStream,
                                           void *audioData,
@@ -42,7 +43,9 @@ private:
     /**
      * To be called when sample rate or tempo change
      */
-    void UpdateSequencePhaseIncrement();
+    void updateSequencePhaseIncrement();
+
+    float pitchToFrequency(int pitch);
 
 private:
 
@@ -61,6 +64,7 @@ private:
     float mTempo = 120;
     int mCurrentStep = 0;
     std::array<bool, kSequencerStepsCount> mIsStepActive;
+    std::array<int, kSequencerStepsCount> mStepPitch;
 };
 
 
