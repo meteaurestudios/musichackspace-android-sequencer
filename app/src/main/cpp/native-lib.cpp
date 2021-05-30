@@ -51,3 +51,11 @@ Java_com_example_mhsandroidsession4_MainActivity_setEngineTempo(JNIEnv *env, job
                                                                 jint tempo) {
     engine.setTempo(tempo);
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_example_mhsandroidsession4_MainActivity_setEngineStepIsActive(JNIEnv *env, jobject thiz,
+                                                                       jint step,
+                                                                       jboolean is_active) {
+    engine.setStepIsActive(step, is_active);
+}

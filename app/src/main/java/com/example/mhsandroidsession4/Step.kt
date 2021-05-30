@@ -7,15 +7,16 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 
 class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
-    abstract class OnPressedListener {
-        abstract fun onPadPressed(pressed : Boolean)
+    abstract class OnStateChangeListener {
+        abstract fun onStateChange(isActive : Boolean)
     }
 
-    private var listener: OnPressedListener? = null
-
+    private var listener: OnStateChangeListener? = null
+    private var isActive = false
     private var radius : Float = 0F
 
     private val circlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -23,7 +24,7 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
         color = Color.GRAY
     }
 
-    fun setOnPressedListener(l : OnPressedListener) {
+    fun setOnStateChangeListener(l : OnStateChangeListener) {
         listener = l
     }
 
@@ -41,13 +42,11 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when(event.action) {
-            MotionEvent.ACTION_DOWN -> {
-                updateView(true)
-                listener?.onPadPressed(true)
-            }
             MotionEvent.ACTION_UP -> {
-                updateView(false)
-                listener?.onPadPressed(false)
+
+                val new_value = !isActive
+                updateView(new_value)
+                listener?.onStateChange(new_value)
             }
         }
 
@@ -57,9 +56,11 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
     fun updateView(pressed : Boolean) {
         if(pressed) {
             circlePaint.color = Color.MAGENTA
+            isActive = true
         }
         else {
             circlePaint.color = Color.GRAY
+            isActive = false
         }
         invalidate()
     }

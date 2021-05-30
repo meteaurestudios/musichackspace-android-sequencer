@@ -4,13 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.media.AudioManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.SeekBar
-import android.widget.Switch
-import android.widget.TextView
 import com.example.mhsandroidsession4.databinding.ActivityMainBinding
 
 const val TAG = "Mytag"
@@ -18,9 +14,12 @@ const val TAG = "Mytag"
 class MainActivity : Activity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var stepsArray : Array<Step>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialize view binding -----
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
@@ -37,17 +36,19 @@ class MainActivity : Activity() {
             setDefaultStreamValues(defaultSampleRate, defaultFramesPerBurst)
         }
 
-        // Switch
+        // Play switch -----
+
         binding.playSwitch.setOnCheckedChangeListener { switch, state ->
             setPlayValue(state)
             Log.i(TAG, "State is $state")
         }
 
-        // Set the tempo range to be in [30; 300], i.e. 271 possible values
-        binding.seekBar.max = 270
-        setTempoValue(120)
+        // Tempo slider -----
 
-        // Seekbar
+        binding.seekBar.max = 270 // set the range to be in [30; 300], i.e. 271 possible values
+        setTempoValue(120)
+        setPlayValue(true)
+
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
@@ -60,6 +61,28 @@ class MainActivity : Activity() {
 
             override fun onStopTrackingTouch(p0: SeekBar?) { }
         })
+
+        // Steps -----
+
+        stepsArray = arrayOf(binding.step1,
+                             binding.step2,
+                             binding.step3,
+                             binding.step4,
+                             binding.step5,
+                             binding.step6,
+                             binding.step7,
+                             binding.step8)
+
+        for(i in stepsArray.indices) {
+            stepsArray[i].setOnStateChangeListener(object: Step.OnStateChangeListener() {
+
+                override fun onStateChange(isActive: Boolean) {
+                    setStepIsActive(i, isActive)
+                    Log.i(TAG, "step $i is $isActive")
+                }
+
+            })
+        }
 
     }
 
@@ -84,6 +107,10 @@ class MainActivity : Activity() {
         setEngineTempo(tempo) // notify engine
     }
 
+    fun setStepIsActive(step : Int, isActive : Boolean) {
+        setEngineStepIsActive(step, isActive)
+    }
+
     // Native methods
     external fun startAudio()
     external fun stopAudio()
@@ -91,6 +118,7 @@ class MainActivity : Activity() {
 
     external fun setEngineIsPlaying(isPlaying: Boolean)
     external fun setEngineTempo(tempo : Int)
+    external fun setEngineStepIsActive(step : Int, isActive: Boolean)
 
     companion object {
         // Used to load the 'native-lib' library on application startup.

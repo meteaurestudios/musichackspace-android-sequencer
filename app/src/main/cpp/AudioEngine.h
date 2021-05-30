@@ -7,6 +7,7 @@
 
 #include <Oboe/Oboe.h>
 #include <vector>
+#include <array>
 #include "SineWaveGenerator.h"
 
 class AudioEngine
@@ -15,11 +16,14 @@ class AudioEngine
 
 public:
 
+    AudioEngine();
+
     void start();
     void stop();
 
     void setIsPlaying(bool isPlaying);
     void setTempo(int tempo);
+    void setStepIsActive(int step, bool isActive);
 
     oboe::DataCallbackResult onAudioReady(oboe::AudioStream *oboeStream,
                                           void *audioData,
@@ -42,12 +46,13 @@ private:
 
 private:
 
+    float mSampleRate = 0.f;
     std::shared_ptr<oboe::AudioStream> mStream;
+
     bool mIsPlaying = false;
 
     SineWaveGenerator mSineWaveGen;
-
-    float mSampleRate = 0.f;
+    std::vector<float> mSineBuffer;
 
     // Sequencing related
     static constexpr int kSequencerStepsCount = 8;
@@ -55,9 +60,7 @@ private:
     double mSequencePhaseIncrement = 0.f;
     float mTempo = 120;
     int mCurrentStep = 0;
-    std::vector<float> mEnvelopeBuffer;
-    std::vector<float> mSineBuffer;
-
+    std::array<bool, kSequencerStepsCount> mIsStepActive;
 };
 
 

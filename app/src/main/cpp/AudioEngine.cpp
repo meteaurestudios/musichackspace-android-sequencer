@@ -11,6 +11,12 @@
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO, TAG,__VA_ARGS__)
 
 // -------------------------------------------------------------------------------------------------
+AudioEngine::AudioEngine()
+{
+
+}
+
+// -------------------------------------------------------------------------------------------------
 void AudioEngine::start()
 {
     oboe::AudioStreamBuilder builder;
@@ -32,7 +38,6 @@ void AudioEngine::start()
 
     // Initialization
     setSampleRate(mStream->getSampleRate());
-    mEnvelopeBuffer.resize(mStream->getBufferCapacityInFrames());
     mSineBuffer.resize(mStream->getBufferCapacityInFrames());
 
     result = mStream->requestStart();
@@ -92,12 +97,20 @@ AudioEngine::onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_
         // Step change
         if(mSequencePhase >= 1.0) {
 
-            // Increase step counter
-            //mCurrentStep = (mCurrentStep+1) % (kSequencerStepsCount);
+            // Increase step counter and reset sequence phase
+            mCurrentStep = (mCurrentStep+1) % (kSequencerStepsCount);
             mSequencePhase = fmod(mSequencePhase, 1.0);
         }
 
-        const float envelope_level = (float) std::max(1.0 - mSequencePhase, 0.0);
+        // Compute envelope level -----
+
+        float envelope_level = 0.f;
+
+        if(mIsStepActive[mCurrentStep]) {
+            envelope_level = (float) std::max(1.0 - mSequencePhase, 0.0);
+        }
+
+        // Fill buffer
         buffer[i] = envelope_level * mSineBuffer[i];
 
         mSequencePhase += mSequencePhaseIncrement;
@@ -128,4 +141,9 @@ void AudioEngine::setTempo(int tempo)
 {
     mTempo = (float) tempo;
     UpdateSequencePhaseIncrement();
+}
+
+// -------------------------------------------------------------------------------------------------
+void AudioEngine::setStepIsActive(int step, bool isActive) {
+    mIsStepActive[step] = isActive;
 }
