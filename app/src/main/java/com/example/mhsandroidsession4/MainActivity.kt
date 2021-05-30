@@ -1,5 +1,6 @@
 package com.example.mhsandroidsession4
 
+import android.app.Activity
 import android.content.Context
 import android.media.AudioManager
 import android.os.Build
@@ -12,7 +13,7 @@ import android.widget.TextView
 
 const val TAG = "Mytag"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
