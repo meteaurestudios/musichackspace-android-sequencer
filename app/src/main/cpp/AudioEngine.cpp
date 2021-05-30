@@ -74,6 +74,10 @@ AudioEngine::onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_
     // Fill buffer with silence
     std::memset(audioData, 0, numFrames*mStream->getChannelCount()*sizeof(float));
 
+    if(!mIsPlaying) {
+        return oboe::DataCallbackResult::Continue;
+    }
+
     auto buffer = static_cast<float *>(audioData);
     int channels = mStream->getChannelCount();
 
@@ -89,7 +93,7 @@ AudioEngine::onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_
         if(mSequencePhase >= 1.0) {
 
             // Increase step counter
-            mCurrentStep = (mCurrentStep+1) % (kSequencerStepsCount);
+            //mCurrentStep = (mCurrentStep+1) % (kSequencerStepsCount);
             mSequencePhase = fmod(mSequencePhase, 1.0);
         }
 
@@ -114,13 +118,14 @@ void AudioEngine::onErrorAfterClose(oboe::AudioStream *oboeStream, oboe::Result 
 }
 
 // -------------------------------------------------------------------------------------------------
-void AudioEngine::setIsActive(bool active)
+void AudioEngine::setIsPlaying(bool isPlaying)
 {
-    mIsActive = active;
+    mIsPlaying = isPlaying;
 }
 
 // -------------------------------------------------------------------------------------------------
-void AudioEngine::setSineFrequency(float freq)
+void AudioEngine::setTempo(int tempo)
 {
-    mSineWaveGen.setFrequency(freq);
+    mTempo = (float) tempo;
+    UpdateSequencePhaseIncrement();
 }

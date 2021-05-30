@@ -18,9 +18,8 @@ public:
     void start();
     void stop();
 
-
-    void setIsActive(bool active);
-    void setSineFrequency(float freq);
+    void setIsPlaying(bool isPlaying);
+    void setTempo(int tempo);
 
     oboe::DataCallbackResult onAudioReady(oboe::AudioStream *oboeStream,
                                           void *audioData,
@@ -30,13 +29,21 @@ public:
 
 private:
 
+    /**
+     * To be called when the sample rate has been assigned to the stream
+     * @param sampleRate
+     */
     void setSampleRate(float sampleRate);
+
+    /**
+     * To be called when sample rate or tempo change
+     */
     void UpdateSequencePhaseIncrement();
 
 private:
 
     std::shared_ptr<oboe::AudioStream> mStream;
-    bool mIsActive = false;
+    bool mIsPlaying = false;
 
     SineWaveGenerator mSineWaveGen;
 

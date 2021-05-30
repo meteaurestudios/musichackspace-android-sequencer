@@ -40,13 +40,14 @@ Java_com_example_mhsandroidsession4_MainActivity_setDefaultStreamValues(JNIEnv *
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_example_mhsandroidsession4_MainActivity_hold(JNIEnv *env, jobject thiz, jboolean hold) {
-    engine.setIsActive(hold);
+Java_com_example_mhsandroidsession4_MainActivity_setEngineIsPlaying(JNIEnv *env, jobject thiz,
+                                                                    jboolean isPlaying) {
+    engine.setIsPlaying(isPlaying);
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_example_mhsandroidsession4_MainActivity_setFrequency(JNIEnv *env, jobject thiz,
-                                                              jint freq) {
-    engine.setSineFrequency(freq);
+Java_com_example_mhsandroidsession4_MainActivity_setEngineTempo(JNIEnv *env, jobject thiz,
+                                                                jint tempo) {
+    engine.setTempo(tempo);
 }

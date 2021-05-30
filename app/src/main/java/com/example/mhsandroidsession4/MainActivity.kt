@@ -38,23 +38,21 @@ class MainActivity : Activity() {
         }
 
         // Switch
-        binding.holdSwitch.setOnCheckedChangeListener { switch, state ->
-            setHoldValue(state)
+        binding.playSwitch.setOnCheckedChangeListener { switch, state ->
+            setPlayValue(state)
             Log.i(TAG, "State is $state")
         }
 
-        // Set the maximum frequency value to 1 kHz and init value to 440 Hz
-        val seekbar = binding.seekBar
-        seekbar.max = 1000
-        //seekbar.progress = 440
-        setFrequencyValue(440)
+        // Set the tempo range to be in [30; 300], i.e. 271 possible values
+        binding.seekBar.max = 270
+        setTempoValue(120)
 
         // Seekbar
-        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-                val frequency = i + 20
-                setFrequencyValue(frequency)
+                val tempo = i + 30
+                setTempoValue(tempo)
                 Log.i(TAG, "Slider value is $i")
             }
 
@@ -62,15 +60,6 @@ class MainActivity : Activity() {
 
             override fun onStopTrackingTouch(p0: SeekBar?) { }
         })
-
-        // Pad
-//        binding.pad.setOnPressedListener(object : Pad.OnPressedListener() {
-//
-//            override fun onPadPressed(pressed : Boolean) {
-//                setHoldValue(pressed)
-//            }
-//
-//        })
 
     }
 
@@ -84,28 +73,15 @@ class MainActivity : Activity() {
         super.onPause()
     }
 
-//    override fun onTouchEvent(event: MotionEvent): Boolean {
-//        when(event.action) {
-//            MotionEvent.ACTION_DOWN -> {
-//                setHoldValue(true)
-//            }
-//            MotionEvent.ACTION_UP -> {
-//                setHoldValue(false)
-//            }
-//        }
-//        return super.onTouchEvent(event)
-//    }
-
-    fun setHoldValue(hold : Boolean) {
-        binding.holdSwitch.isChecked = hold // update switch
-        //binding.pad.updateView(hold) // update pad
-        hold(hold) // notify engine
+    fun setPlayValue(isPlaying : Boolean) {
+        binding.playSwitch.isChecked = isPlaying // update switch
+        setEngineIsPlaying(isPlaying) // notify engine
     }
 
-    fun setFrequencyValue(freq : Int) {
-        binding.seekBar.progress = freq - 20 // update seekbar
-        binding.frequencyValue.text = "$freq Hz"// update text value
-        setFrequency(freq) // notify engine
+    fun setTempoValue(tempo : Int) {
+        binding.seekBar.progress = tempo - 30 // update seekbar
+        binding.tempoValue.text = "$tempo bpm"// update text value
+        setEngineTempo(tempo) // notify engine
     }
 
     // Native methods
@@ -113,8 +89,8 @@ class MainActivity : Activity() {
     external fun stopAudio()
     external fun setDefaultStreamValues(sampleRate : Int , framesPerBurst : Int)
 
-    external fun hold(hold: Boolean)
-    external fun setFrequency(freq : Int)
+    external fun setEngineIsPlaying(isPlaying: Boolean)
+    external fun setEngineTempo(tempo : Int)
 
     companion object {
         // Used to load the 'native-lib' library on application startup.

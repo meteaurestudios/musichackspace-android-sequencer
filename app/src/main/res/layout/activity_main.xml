@@ -7,38 +7,30 @@
     tools:context=".MainActivity">
 
     <Switch
-        android:id="@+id/holdSwitch"
+        android:id="@+id/playSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="Hold"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="40dp"
+        android:text="Play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="52dp"
-        android:text="Frequency"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/holdSwitch" />
 
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="150dp"
         android:layout_height="22dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/playSwitch"
+        app:layout_constraintStart_toEndOf="@+id/playSwitch"
+        app:layout_constraintTop_toTopOf="@+id/playSwitch"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/frequencyValue"
+        android:id="@+id/tempoValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
