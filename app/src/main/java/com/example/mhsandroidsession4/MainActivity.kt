@@ -157,13 +157,18 @@ class MainActivity : Activity() {
         setEngineTempo(tempo) // notify engine
     }
 
+    /**
+     * Sets the state on a given step
+     * @param step the index of the targeted step, from 0 to 7
+     * @param isActive if true the step is on, off otherwise
+     */
     fun setStepIsActiveValue(step : Int, isActive : Boolean) {
         setEngineStepIsActive(step, isActive)
     }
 
     /**
      * Sets the pitch value on a given step
-     * @param step the index of the targeted step from 0 to 7
+     * @param step the index of the targeted step, from 0 to 7
      * @param pitch the index of the pitch from 0 to 11 (pitch array values)
      */
     fun setStepPitchValue(step : Int, pitch : Int) {
