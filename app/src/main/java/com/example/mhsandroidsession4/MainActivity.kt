@@ -144,7 +144,7 @@ class MainActivity : Activity() {
         super.onPause()
     }
 
-    // Parameter centered methods
+    // Parameter centered methods -----
 
     fun setPlayValue(isPlaying : Boolean) {
         binding.playSwitch.isChecked = isPlaying // update switch
@@ -185,7 +185,8 @@ class MainActivity : Activity() {
         stepsArray[step].highlight(true)
     }
 
-    // Native methods
+    // Native methods -----
+
     external fun startAudio()
     external fun stopAudio()
     external fun setDefaultStreamValues(sampleRate : Int , framesPerBurst : Int)
