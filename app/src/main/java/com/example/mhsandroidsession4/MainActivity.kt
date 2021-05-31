@@ -51,8 +51,6 @@ class MainActivity : Activity() {
         // Tempo slider -----
 
         binding.seekBar.max = 270 // set the range to be in [30; 300], i.e. 271 possible values
-        setTempoValue(120)
-        setPlayValue(true)
 
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
@@ -125,11 +123,15 @@ class MainActivity : Activity() {
                 }
 
             })
-
-            // Engine communication thread init
-            engineCommunicationThread = CommunicationThread(this)
-            engineCommunicationThread.start()
         }
+
+        // Initialize play state and tempo value
+        setTempoValue(120)
+        setPlayValue(true)
+
+        // Engine communication thread init
+        engineCommunicationThread = CommunicationThread(this)
+        engineCommunicationThread.start()
     }
 
     override fun onResume() {
