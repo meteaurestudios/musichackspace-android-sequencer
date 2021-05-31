@@ -17,7 +17,6 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private var listener: OnStateChangeListener? = null
     private var isActive = false
-    private var isHighlighted = false
     private var radius : Float = 0F
 
     private val circlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -74,7 +73,6 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
             updateSate(isActive)
         }
 
-        isHighlighted = highlighted
         invalidate()
     }
 
