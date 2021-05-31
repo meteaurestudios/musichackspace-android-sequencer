@@ -102,7 +102,7 @@ class MainActivity : Activity() {
             // Create an ArrayAdapter using the string array and a default spinner layout
             ArrayAdapter.createFromResource(
                 this,
-                R.array.pitch_array,
+                R.array.pitches_array,
                 android.R.layout.simple_spinner_item
             ).also { adapter ->
                 // Specify the layout to use when the list of choices appears

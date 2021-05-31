@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MHS Android Session 4</string>
 
-    <string-array name="pitch_array">
+    <string-array name="pitches_array">
         <item>C</item>
         <item>C#</item>
         <item>D</item>
