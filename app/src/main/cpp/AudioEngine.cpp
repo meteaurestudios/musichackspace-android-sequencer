@@ -172,6 +172,6 @@ int AudioEngine::getCurrentStep()
 float AudioEngine::pitchToFrequency(int pitch)
 {
     const float c4_midi_note = 60;
-    const float distance_from_A440_note = (c4_midi_note + mStepPitch[mCurrentStep]) - 69;
+    const float distance_from_A440_note = (c4_midi_note + pitch) - 69;
     return powf(2.f, distance_from_A440_note/12) * 440.f;
 }

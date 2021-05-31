@@ -66,15 +66,15 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
         invalidate()
     }
 
-    fun highlightStep(highligthed : Boolean) {
-        if(highligthed) {
+    fun highlightStep(highlighted : Boolean) {
+        if(highlighted) {
             circlePaint.color = Color.CYAN
         }
         else {
             updateSate(isActive)
         }
 
-        isHighlighted = highligthed
+        isHighlighted = highlighted
         invalidate()
     }
 
