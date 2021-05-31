@@ -77,7 +77,7 @@ class MainActivity : Activity() {
                              binding.step8)
 
         for(i in stepsArray.indices) {
-            stepsArray[i].setOnStateChangeListener(object: Step.OnStateChangeListener() {
+            stepsArray[i].setOnStateChangeListener(object: Step.OnStateChangeListener {
 
                 override fun onStateChange(isActive: Boolean) {
                     setStepIsActiveValue(i, isActive)

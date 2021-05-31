@@ -11,8 +11,8 @@ import android.widget.Button
 
 class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
-    abstract class OnStateChangeListener {
-        abstract fun onStateChange(isActive : Boolean)
+    interface OnStateChangeListener {
+        fun onStateChange(isActive : Boolean)
     }
 
     private var listener: OnStateChangeListener? = null
