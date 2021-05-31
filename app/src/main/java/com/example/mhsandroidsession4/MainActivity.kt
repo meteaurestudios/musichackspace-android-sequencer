@@ -168,11 +168,11 @@ class MainActivity : Activity() {
     fun updateCurrentStep(step : Int) {
         // Remove previous highlight on all steps
         for(i in stepsArray.indices) {
-            stepsArray[i].highlightStep(false)
+            stepsArray[i].highlight(false)
         }
 
         // Highlight new step
-        stepsArray[step].highlightStep(true)
+        stepsArray[step].highlight(true)
     }
 
     // Native methods
