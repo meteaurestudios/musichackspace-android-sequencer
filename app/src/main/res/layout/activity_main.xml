@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/tempoSeekBar"
         android:layout_width="150dp"
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
@@ -36,9 +36,9 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/seekBar"
-        app:layout_constraintStart_toEndOf="@+id/seekBar"
-        app:layout_constraintTop_toTopOf="@+id/seekBar"
+        app:layout_constraintBottom_toBottomOf="@+id/tempoSeekBar"
+        app:layout_constraintStart_toEndOf="@+id/tempoSeekBar"
+        app:layout_constraintTop_toTopOf="@+id/tempoSeekBar"
         app:layout_constraintVertical_bias="0.333" />
 
     <com.example.mhsandroidsession4.Step

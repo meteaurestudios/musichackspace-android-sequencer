@@ -50,9 +50,9 @@ class MainActivity : Activity() {
 
         // Tempo slider -----
 
-        binding.seekBar.max = 270 // set the range to be in [30; 300], i.e. 271 possible values
+        binding.tempoSeekBar.max = 270 // set the range to be in [30; 300], i.e. 271 possible values
 
-        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        binding.tempoSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 val tempo = i + 30
@@ -152,7 +152,7 @@ class MainActivity : Activity() {
     }
 
     fun setTempoValue(tempo : Int) {
-        binding.seekBar.progress = tempo - 30 // update seekbar
+        binding.tempoSeekBar.progress = tempo - 30 // update seekbar
         binding.tempoValue.text = "$tempo bpm"// update text value
         setEngineTempo(tempo) // notify engine
     }
