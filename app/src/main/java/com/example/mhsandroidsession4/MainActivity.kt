@@ -144,15 +144,7 @@ class MainActivity : Activity() {
         super.onPause()
     }
 
-    fun updateCurrentStep(step : Int) {
-        // Remove previous highlight on all steps
-        for(i in stepsArray.indices) {
-            stepsArray[i].highlightStep(false)
-        }
-
-        // Highlight new step
-        stepsArray[step].highlightStep(true)
-    }
+    // Parameter centered methods
 
     fun setPlayValue(isPlaying : Boolean) {
         binding.playSwitch.isChecked = isPlaying // update switch
@@ -171,6 +163,16 @@ class MainActivity : Activity() {
 
     fun setStepPitchValue(step : Int, pitch : Int) {
         setEngineStepPitch(step, pitch)
+    }
+
+    fun updateCurrentStep(step : Int) {
+        // Remove previous highlight on all steps
+        for(i in stepsArray.indices) {
+            stepsArray[i].highlightStep(false)
+        }
+
+        // Highlight new step
+        stepsArray[step].highlightStep(true)
     }
 
     // Native methods
