@@ -111,12 +111,9 @@ AudioEngine::onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_
         // Compute envelope level -----
 
         float envelope_level = 0.f;
-
-        if(mIsStepActive[mCurrentStep]) {
-            envelope_level = (float) std::max(1.0 - mSequencePhase, 0.0);
-        }
-
+        
         // TODO: if current step is active, set envelope level to 1, and to 0 if not
+
         // TODO: fill out buffer
 
         mSequencePhase += mSequencePhaseIncrement;
