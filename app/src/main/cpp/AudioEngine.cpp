@@ -105,8 +105,7 @@ AudioEngine::onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_
             // Increase current step index
             mCurrentStep = (mCurrentStep+1) % (kSequencerStepsCount);
 
-            // Update sine wave pitch
-            mSineWaveGen.setFrequency(pitchToFrequency(mStepPitch[mCurrentStep]));
+            // TODO: update sine wave pitch (using pitchToFrequency)
         }
 
         // Compute envelope level -----
@@ -117,8 +116,8 @@ AudioEngine::onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_
             envelope_level = (float) std::max(1.0 - mSequencePhase, 0.0);
         }
 
-        // Fill buffer
-        buffer[i] = envelope_level * mSineBuffer[i];
+        // TODO: if current step is active, set envelope level to 1, and to 0 if not
+        // TODO: fill out buffer
 
         mSequencePhase += mSequencePhaseIncrement;
     }

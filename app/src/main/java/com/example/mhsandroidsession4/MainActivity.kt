@@ -99,30 +99,8 @@ class MainActivity : Activity() {
                                   binding.step8Pitch)
 
         for(i in stepsPitchArray.indices) {
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter.createFromResource(
-                this,
-                R.array.pitches_array,
-                android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                stepsPitchArray[i].adapter = adapter
-            }
-
-            stepsPitchArray[i].setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-
-                override fun onItemSelected(parent: AdapterView<*>,  view: View?,  pos: Int,  id: Long ) {
-                    setStepPitchValue(i, pos)
-                    Log.i(TAG, "step $i value $pos")
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // Do nothing
-                }
-
-            })
+            // TODO: create an ArrayAdapter with pitches_array as values and assign to each pitch spinner
+            // TODO: implement setOnItemSelectedListener listener for each pitch spinner
         }
 
         // Initialize play state and tempo value
