@@ -176,13 +176,9 @@ class MainActivity : Activity() {
     }
 
     fun updateCurrentStep(step : Int) {
-        // Remove previous highlight on all steps
-        for(i in stepsArray.indices) {
-            stepsArray[i].highlight(false)
-        }
-
-        // Highlight new step
-        stepsArray[step].highlight(true)
+        // TODO
+        // 1. remove previous highlight on all steps
+        // 2. highlight new step
     }
 
     // Native methods -----
@@ -214,16 +210,11 @@ class MainActivity : Activity() {
 
             while(!isInterrupted) {
                 try {
-                    val step = activity.getEngineCurrentStep()
 
-                    if(step != currentStep) {
+                    // TODO
+                    // 1. get current step from native method getEngineCurrentStep() from the activity
+                    // 2. if step changed, update current step in activity (from UI thread)
 
-                        activity.runOnUiThread {
-                            activity.updateCurrentStep(step)
-                        }
-
-                        currentStep = step
-                    }
                     sleep(10)
                 }
                 catch (ex: InterruptedException) {

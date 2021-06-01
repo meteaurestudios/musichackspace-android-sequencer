@@ -66,13 +66,9 @@ class Step(context: Context, attrs: AttributeSet) : View(context, attrs) {
     }
 
     fun highlight(isHighlighted : Boolean) {
-        if(isHighlighted) {
-            circlePaint.color = Color.CYAN
-            invalidate()
-        }
-        else {
-            updateSate(isActive)
-        }
+        // TODO: implement the following behavior:
+        // if isHighlighted, display the step in cyan
+        // otherwise in gray/magenta (depending on its current state)
     }
 
 }
