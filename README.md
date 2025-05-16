@@ -1,3 +1,3 @@
-# musichackspace-android-sequencer
+# Musichackspace Android Sequencer
 
-Sequencer app for Android built to put in application materials learnt during the [Android Audio Development Fundamentals](https://musichackspace.org/events/android-audio-development-fundamentals-live-session/) workshop series on Music Hackspace.
+Sample application for the [Android Audio Development Fundamentals](https://musichackspace.org/product/android-audio-development-fundamentals-on-demand/) workshop series on Music Hackspace.
